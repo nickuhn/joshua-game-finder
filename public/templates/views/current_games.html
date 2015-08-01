@@ -50,17 +50,17 @@
                 <button class="btn-alert" type="submit" data-ng-click="destroy(instance._id); reloadPage()">Remove</button>
               </div>
               <div class="three columns">
-                <button type="submit" class="game-over" data-ng-click="gameOver(instance._id); reloadPage()">Game Complete</button>
+                <button type="submit" class="game-over" ng-show="!gameOver" data-ng-click="gameOver(instance._id); reloadPage()">Game Complete</button>
               </div>
             </div>
           </form>
-          <form ng-show="userId !== instance.creator">
+          <form ng-show="userId !== instance.creator && hosting === false && instance.gameOver === false">
             <div class="row">
               <div class="three columns">
-                <button class="join-game" type="submit" data-ng-click="join(instance._id); reloadPage()">Join This Game</button>
+                <button class="join-game" type="submit" ng-show="isCommitted===false && instance.signedUp < instance.playersNeeded" data-ng-click="join(instance._id); reloadPage()">Join This Game</button>
               </div>
               <div class="three columns">
-                <button class="leave-game" type="submit" data-ng-click="quit(instance._id); reloadPage()">Leave this game</button>
+                <button class="leave-game" type="submit" ng-show="isCommitted===true && findId(instance).indexOf(userId)!=-1" data-ng-click="quit(instance._id); reloadPage()">Leave this game</button>
               </div>
             </div>
           </form>

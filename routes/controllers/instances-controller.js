@@ -9,7 +9,13 @@ module.exports = {
       if (err) {
         res.status(500).json({success: false, msg: 'Error finding instances', error: err});
       } else {
-        res.json({success: true, msg: 'Get all instances successful', data: instances, userId: req.decoded._id});
+        User.findOne({_id: req.decoded._id}, function(err, data) {
+          if (err) {
+            res.status(500).json({success: false, msg: 'Error finding user', error: err});
+          } else {
+            res.json({success: true, msg: 'Get all instances successful', data: instances, userId: req.decoded._id, isCommitted: data.isCommitted, hosting: data.hosting});
+          }
+        });
       }
     });
   },

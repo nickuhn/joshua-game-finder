@@ -369,10 +369,10 @@ describe('Instances REST API', function() {
       });
   });
 
-  after(function(done) {
-    mongoose.connection.db.dropDatabase(function() {
-      done();
-    });
-  });
+  // after(function(done) {
+  //   mongoose.connection.db.dropDatabase(function() {
+  //     done();
+  //   });
+  // });
 
 });
